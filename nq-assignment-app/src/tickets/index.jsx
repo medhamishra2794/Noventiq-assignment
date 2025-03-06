@@ -1,15 +1,18 @@
+import "./dashboard.scss";
 import Dashboard from "./dashboard";
 import Footer from "./footer";
 import Header from "./header";
 
 const Tickets=()=>{
-    return (
-        <>
-            <Header />
-            <Dashboard />
-            <Footer />
-        </>
-    )   
+  return (
+    <>
+      <div className="dashboard-layout">
+        <Header />
+        <Dashboard />
+        <Footer />
+      </div>
+    </>
+  )   
 }
 
 export default Tickets;
