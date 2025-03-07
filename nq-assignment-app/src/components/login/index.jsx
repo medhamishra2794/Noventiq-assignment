@@ -1,11 +1,11 @@
 import "./login.scss";
-import logo from "../assets/images/logo.svg";
+import logo from "../../assets/images/logo.svg";
 import { MdOutlineEmail } from "react-icons/md";
 import { GoLock } from "react-icons/go";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { useState } from "react";
-import { PublicProviderEmails, Regex, UserCredentials } from "../Constant";
+import { PublicProviderEmails, Regex, UserCredentials } from "../../Constant";
 import Tickets from "../tickets";
 import { useTranslation } from "react-i18next";
 

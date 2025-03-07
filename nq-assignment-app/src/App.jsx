@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import Login from './login'
+import Login from './components/login'
 import "./App.css";
 import "./assets/scss/base.scss"
+import Tickets from './components/tickets';
 
 function App() {
 
   return (
     <>
-      <Login />
+      {/* <Login /> */}
+      <Tickets />
     </>
   )
 }

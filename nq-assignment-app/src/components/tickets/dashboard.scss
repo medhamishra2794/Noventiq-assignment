@@ -61,6 +61,53 @@
   background-color: #01a7cd;
   box-shadow: 0px 2px 3px 1px #c5c5c5;
 }
-.search-input{
-  box-shadow: 0px 2px 3px 1px #c5c5c5;
+.card-ticket{
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 3px;
+  box-shadow: 0 2px 2px 0px #00000066;
+  margin-bottom: 10px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  .card-head{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .ticket-icon{
+      font-size: 22px;
+      color: #ed934b;
+    }
+    .ticket-title{
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+  .ticket-detail{
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .priority-status{
+    padding: 5px;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 3px;
+    margin-top: 10px;
+    font-weight: 500;
+    &.high{
+      background-color: #fe6624;
+    }
+    &.critical{
+      background-color: #e51714;
+    }
+    &.medium{
+      background-color: #ffc280;
+      color: #000;
+    }
+    &.low{
+      background-color: #fffb63;
+      color: #000;
+    }
+  }
 }
