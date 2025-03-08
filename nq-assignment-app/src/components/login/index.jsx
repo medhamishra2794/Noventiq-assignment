@@ -9,141 +9,224 @@ import { PublicProviderEmails, Regex, UserCredentials } from "../../Constant";
 import Tickets from "../tickets";
 import { useTranslation } from "react-i18next";
 
-
-const Login=()=> {
+const Login = () => {
   const { t, i18n } = useTranslation();
- 
-  const [formData,setFormData]= useState({
-    email:'',
-    password:'',
-    language:i18n.language,
-    rememberMe:false
-  });
-  const [showPassword, setShowPassword]= useState(false);
-  const [loggedIn,setLoggedIn]= useState(false);
-  const [error, setError] = useState({email:'',password:''});
-  const checkEmailDomain = (value) => {
-    const domain = value.split('@')[1];
-    return PublicProviderEmails.includes(domain)
-  }
 
-  
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    language: i18n.language,
+    rememberMe: false,
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState({ email: "", password: "" });
+  const checkEmailDomain = (value) => {
+    const domain = value.split("@")[1];
+    return PublicProviderEmails.includes(domain);
+  };
+
   const validateEmail = (email) => {
     if (!email.length) {
-      return t('Email is required.');
+      return t("Email is required.");
     }
     if (!Regex.test(email)) {
-      return t('Email format error.');
+      return t("Email format error.");
     }
     if (checkEmailDomain(email)) {
-      return t('Email domain invalid.')
+      return t("Email domain invalid.");
     }
-    return ''
-}
+    return "";
+  };
 
-const handleChange = (key,value)=>{
-  setFormData({
-    ...formData,
-    [key]: value
-  });
-}
+  const handleChange = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (formData.email === UserCredentials.email && formData.password === UserCredentials.password) {
-  setLoggedIn(true);
-  } else {
-    alert('Incorrect Credentials')
-  }
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      formData.email === UserCredentials.email &&
+      formData.password === UserCredentials.password
+    ) {
+      setLoggedIn(true);
+    } else {
+      alert("Incorrect Credentials");
+    }
+  };
 
   return (
     <>
-      {
-        !loggedIn ?
+      {!loggedIn ? (
         <div className="login-layout">
           <div className="login-wrap">
-            <form onSubmit={handleSubmit} class="w-full">
+            <form onSubmit={handleSubmit} className="w-full">
               <div className="login-logo">
                 <img src={logo} alt="Noventiq Logo" />
               </div>
               <div className="login-card">
-                <div class="md:flex md:items-center mb-4">
-                  <div class="md:w-1/3">
-                    <label class="block font-bold mb-1 md:mb-0 pr-4 text-base" for="inline-full-name">
+                <div className="md:flex md:items-center mb-4">
+                  <div className="md:w-1/3">
+                    <label
+                      className="block font-bold mb-1 md:mb-0 pr-4 text-base"
+                      htmlFor="email"
+                    >
                       Email:
                     </label>
                   </div>
-                  <div class="md:w-2/3">
-                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300">
-                        <div class="shrink-0 text-base select-none sm:text-sm/6"><MdOutlineEmail /></div>
-                        <input type="email" name="email" id="email" class="block grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" onChange={(e)=>{handleChange('email',e.target.value)}} 
-                        onBlur={(e)=>setError({...error,email:validateEmail(e.target.value)})}
-                        />
+                  <div className="md:w-2/3">
+                    <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300">
+                      <div className="shrink-0 text-base select-none sm:text-sm/6">
+                        <MdOutlineEmail />
                       </div>
-                      {error.email ? <span className="form-error">{error.email}</span> : ''}
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        className="block grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        onChange={(e) => {
+                          handleChange("email", e.target.value);
+                        }}
+                        onBlur={(e) =>
+                          setError({
+                            ...error,
+                            email: validateEmail(e.target.value),
+                          })
+                        }
+                      />
+                    </div>
+                    {error.email ? (
+                      <span className="form-error">{error.email}</span>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
-                <div class="md:flex md:items-center mb-4">
-                  <div class="md:w-1/3">
-                    <label class="block font-bold mb-1 md:mb-0 pr-4 text-base" for="inline-full-name">
-                    {t("Password")}  :
+                <div className="md:flex md:items-center mb-4">
+                  <div className="md:w-1/3">
+                    <label
+                      className="block font-bold mb-1 md:mb-0 pr-4 text-base"
+                      htmlFor="password"
+                    >
+                      {t("Password")}:
                     </label>
                   </div>
-                  <div class="md:w-2/3">
-                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300">
-                        <div class="shrink-0 text-base select-none sm:text-sm/6"><GoLock /></div>
-                        <input type={showPassword ? "text":"password"} name="password" id="password" class="block grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-                         onChange={(e)=>{handleChange('password',e.target.value)}} onBlur={(e)=>setError({...error,password:e.target.value ? '':t('Password is required.')})}/>
-                        <div class="grid shrink-0 grid-cols-1 pr-3 text-gray-500">
-                          { !showPassword?
-                            <LuEye onClick={()=>setShowPassword(val=>!val)}/> : <LuEyeOff onClick={()=>setShowPassword(val=>!val)}/>
-                          }
-                          {error.password ? <span className="form-error">{error.password}</span> : ''}
-                        </div>
+                  <div className="md:w-2/3">
+                    <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300">
+                      <div className="shrink-0 text-base select-none sm:text-sm/6">
+                        <GoLock />
                       </div>
-                      <a href="#" className="block text-xs underline font-medium mt-2">{t("Forgot Password?")}</a>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        id="password"
+                        className="block grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        onChange={(e) => {
+                          handleChange("password", e.target.value);
+                        }}
+                        onBlur={(e) =>
+                          setError({
+                            ...error,
+                            password: e.target.value
+                              ? ""
+                              : t("Password is required."),
+                          })
+                        }
+                      />
+                      <div className="grid shrink-0 grid-cols-1 pr-3 text-gray-500">
+                        <button
+                          type="button"
+                          aria-label="toggle password visibility"
+                          onClick={() => setShowPassword((val) => !val)}
+                        >
+                          {!showPassword ? <LuEye /> : <LuEyeOff />}
+                        </button>
+                        {error.password ? (
+                          <span className="form-error">{error.password}</span>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                    <a
+                      href="#"
+                      className="block text-xs underline font-medium mt-2"
+                    >
+                      {t("Forgot Password?")}
+                    </a>
                   </div>
                 </div>
-                <div class="md:flex md:items-center mb-4">
-                  <div class="md:w-1/3">
-                    <label class="block font-bold mb-1 md:mb-0 pr-4 text-base" for="inline-full-name">
-                    {t("Language")}  :
+                <div className="md:flex md:items-center mb-4">
+                  <div className="md:w-1/3">
+                    <label
+                      className="block font-bold mb-1 md:mb-0 pr-4 text-base"
+                      htmlFor="language"
+                    >
+                      {t("Language")}:
                     </label>
                   </div>
-                  <div class="sm:w-full md:w-48">
-                    <div class="grid grid-cols-1">
-                      <select id="language" name="language"  defaultValue={formData.language} autocomplete="language-name" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 sm:text-sm/6" onChange={(e)=>{handleChange('language',e.target.value); i18n.changeLanguage(e.target.value)}}>
-                        <option value={'en'}>English</option>
-                        <option value={'hi'}>Hindi</option>
+                  <div className="sm:w-full md:w-48">
+                    <div className="grid grid-cols-1">
+                      <select
+                        id="language"
+                        name="language"
+                        defaultValue={formData.language}
+                        autoComplete="language-name"
+                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 sm:text-sm/6"
+                        onChange={(e) => {
+                          handleChange("language", e.target.value);
+                          i18n.changeLanguage(e.target.value);
+                        }}
+                      >
+                        <option value={"en"}>English</option>
+                        <option value={"hi"}>Hindi</option>
                       </select>
-                      <div class="flex justify-center items-center pointer-events-none col-start-1 row-start-1 w-8 h-9 self-center justify-self-end sm:w-6 text-lg border-l border-gray-300"><MdOutlineArrowDropDown /></div>
+                      <div className="flex justify-center items-center pointer-events-none col-start-1 row-start-1 w-8 h-9 self-center justify-self-end sm:w-6 text-lg border-l border-gray-300">
+                        <MdOutlineArrowDropDown />
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="md:flex md:items-center justify-center">
-                  <label class="inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer" onChange={(e)=>handleChange('rememberMe',e.target.checked)}/>
-                    <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[4px] after:bg-white after:border-gray-100 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-gray-900"></div>
-                    <span class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-600">{t("Remember me")} </span>
+                <div className="md:flex md:items-center justify-center">
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      value=""
+                      className="sr-only peer"
+                      onChange={(e) =>
+                        handleChange("rememberMe", e.target.checked)
+                      }
+                    />
+                    <div className="relative w-8 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[4px] after:bg-white after:border-gray-100 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-gray-900"></div>
+                    <span className="ms-2 text-xs font-medium text-gray-900 dark:text-gray-600">
+                      {t("Remember me")}{" "}
+                    </span>
                   </label>
                 </div>
               </div>
               <div className="mt-4 flex justify-center">
-                <button type="submit" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-4 rounded w-56" disabled={error.email || error.password}>
-                {t("Log in")}
+                <button
+                  type="submit"
+                  className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-4 rounded w-56"
+                  disabled={error.email || error.password}
+                >
+                  {t("Log in")}
                 </button>
               </div>
             </form>
           </div>
           <div className="mt-6 text-xs font-semibold">
-            {t('Copyright 2025 Noventiq | Powered by Noventiq')}
+            {t("Copyright 2025 Noventiq | Powered by Noventiq")}
           </div>
-        </div> :
-        <Tickets/>
-      }
+        </div>
+      ) : (
+        <Tickets />
+      )}
     </>
   );
-}
+};
 
 export default Login;
