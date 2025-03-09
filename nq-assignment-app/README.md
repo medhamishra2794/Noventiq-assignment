@@ -1,12 +1,98 @@
-# React + Vite
+## React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This template provides a minimal setup to get React working in Vite and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Clone the repository
 
-## Expanding the ESLint configuration
+git clone https://github.com/medhamishra2794/Noventiq-assignment/tree/main/nq-assignment-app
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+### Install dependencies
+
+After cloning the project repository, run this command in the project directory to install dependencies:
+
+`npm install`
+
+
+### Start the development server
+
+Once the dependencies are installed, start the development server:
+
+`npm run dev`
+
+
+## Testing Guide
+
+### Quick Start
+
+```bash
+# Run all tests
+npm test -- --run
+
+# Run tests in watch mode
+npm test
+```
+
+### Test Files
+
+- Login Component: `src/components/login/__tests__/Login.test.jsx`
+
+  - Tests form rendering
+  - Email validation
+  - Password visibility
+  - Language selection
+  - Remember me functionality
+
+- Dashboard Component: `src/components/tickets/__tests__/Dashboard.test.jsx`
+  - Tests header section
+  - Ticket list rendering
+  - Action buttons
+
+### Common Testing Commands
+
+```bash
+# Run specific test file
+npm test -- src/components/login/__tests__/Login.test.jsx
+```
+
+### Test Structure
+
+- Tests use React Testing Library and Vitest
+- Each component has its own `__tests__` directory
+- Test files follow the pattern: `ComponentName.test.jsx`
+
+
+## Folder structure
+
+```sh
+    │
+    ├── public                  # public files (favicon, language locales)
+    ├── src                     # source files
+    │   ├── assets
+    │       ├── scss            # scss files
+    │   │   └── images          # images
+    │   ├── components
+    │   │   ├── login           # login component
+    │   │   └── tickets         # tickets component
+    │   ├── App.jsx
+    │   ├── Constant.js         #constants
+    │   ├── i18n.js             #language translation
+    │   ├── main.jsx
+    │   └── setupTests.js       #test setup
+    ├── eslint.config.js
+    ├── .gitignore
+    ├── index.html
+    ├── package.json
+    ├── README.md
+    └── vite.config.js
+    └── vitest.config.js
+```
+
+## External libraries used
+
+- Tailwind CSS (For UI components and responsive)
+
+- React Icons
+
+- react-i18next (Internationalization and Translation)

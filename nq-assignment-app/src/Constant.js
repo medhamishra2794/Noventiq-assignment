@@ -10,5 +10,5 @@ export const PublicProviderEmails = [
 
 export const UserCredentials = {
   email:'medha.mishra@domain.com',
-  password:'Medha@1234'
+  password:'Medha@123'
 }

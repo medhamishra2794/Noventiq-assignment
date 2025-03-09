@@ -144,19 +144,21 @@ const Login = () => {
                         >
                           {!showPassword ? <LuEye /> : <LuEyeOff />}
                         </button>
-                        {error.password ? (
-                          <span className="form-error">{error.password}</span>
-                        ) : (
-                          ""
-                        )}
                       </div>
                     </div>
-                    <a
-                      href="#"
-                      className="block text-xs underline font-medium mt-2"
-                    >
-                      {t("Forgot Password?")}
-                    </a>
+                    <div className="flex justify-between items-center">
+                      <a
+                        href="#"
+                        className="block text-xs underline font-medium mt-2"
+                        >
+                        {t("Forgot Password?")}
+                      </a>
+                      {error.password ? (
+                        <span className="form-error">{error.password}</span>
+                        ) : (
+                          ""
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="md:flex md:items-center mb-4">
